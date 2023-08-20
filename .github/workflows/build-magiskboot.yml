@@ -62,3 +62,18 @@ jobs:
             echo Execution Failed >RunDate.txt
             exit 1
           }
+      - name: Prepare Releasing
+        run: |
+          cd $GITHUB_WORKSPACE/build_workdir/
+          zip -r ./magiskboot.zip ./out/*
+
+      - name: Release
+        uses: softprops/action-gh-release@master
+        with:
+          tag_name: Build
+          draft: false
+          prerelease: false
+          files: |
+            $GITHUB_WORKSPACE/build_workdir/magiskboot.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
