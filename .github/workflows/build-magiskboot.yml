@@ -1,0 +1,63 @@
+name: Build magiskboot
+on:
+  schedule:
+    - cron: 0 0/12 * * 
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out
+        uses: actions/checkout@v3
+    
+      - name: Setup building environment
+        run: |
+          mkdir -p $GITHUB_WORKSPACE/build_workdir
+          sudo apt update
+          sudo apt upgrade
+      
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          distribution: "temurin"
+          java-version: "17"
+
+      - name: Set up Python 3
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.x"
+
+      - name: Build
+        run: |
+          cd $GITHUB_WORKSPACE/build_workdir
+          git clone --recurse-submodules https://github.com/topjohnwu/Magisk.git magiskboot
+          cd magiskboot
+          chmod +x ./build.py
+          ./build.py ndk
+          ./build.py -v binary
+          ls ./native/out/
+          cp ./native/out/x86_64/magiskboot ../out/x86_64/magiskboot
+          cp ./native/out/x86/magiskboot ../out/x86/magiskboot
+          cp ./native/out/arm64-v8a/magiskboot ../out/arm64-v8a/magiskboot
+          cp ./native/out/armeabi-v7a/magiskboot ../out/armeabi-v7a/magiskboot
+      
+      - name: Commit files
+        run: |
+          cd $GITHUB_WORKSPACE/build_workdir/out
+          {
+            git config user.name github-actions
+            git config user.email github-actions@github.com
+            git add .
+            git commit -m "$(date "+%Y-%m-%d %H:%M:%S") UTC" -a
+            if [ $? -eq 0 ]; then
+                date >> RunDate.txt
+                git commit -m "$(date "+%Y-%m-%d %H:%M:%S")" -a
+                git push
+            else
+                echo No Update
+            fi
+          } || {
+            echo Execution Failed >RunDate.txt
+            exit 1
+          }
