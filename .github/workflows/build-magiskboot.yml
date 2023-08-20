@@ -32,16 +32,21 @@ jobs:
         run: |
           cd $GITHUB_WORKSPACE/build_workdir
           mkdir out
+          cd out
+          mkdir x86_64
+          mkdir x86
+          mkdir arm64-v8a
+          mkdir armeabi-v7a
+          cd ..
           git clone --recurse-submodules https://github.com/topjohnwu/Magisk.git magiskboot
           cd magiskboot
           chmod +x ./build.py
           ./build.py ndk
           ./build.py -v binary
-          cd ./native/out/
-          rm -rf elf-cleaner
-          rm -rf generated
-          cd ..
-          cp -r out $GITHUB_WORKSPACE/build_workdir/out
+          cp -p ./native/out/x86_64/magiskboot $GITHUB_WORKSPACE/build_workdir/out/x86_64/
+          cp -p ./native/out/x86/magiskboot $GITHUB_WORKSPACE/build_workdir/out/x86/
+          cp -p ./native/out/arm64-v8a/magiskboot $GITHUB_WORKSPACE/build_workdir/out/arm64-v8a/
+          cp -p ./native/out/armeabi-v7a/magiskboot $GITHUB_WORKSPACE/build_workdir/out/armeabi-v7a/
       
       - name: Commit files
         run: |
@@ -62,7 +67,7 @@ jobs:
             echo Execution Failed >RunDate.txt
             exit 1
           }
-          
+
       - name: Prepare Releasing
         run: |
           cd $GITHUB_WORKSPACE/build_workdir/
