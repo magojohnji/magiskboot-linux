@@ -31,6 +31,7 @@ jobs:
       - name: Build
         run: |
           cd $GITHUB_WORKSPACE/build_workdir
+          rm -rf out
           mkdir out
           cd out
           mkdir x86_64
