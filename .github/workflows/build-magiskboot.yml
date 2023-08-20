@@ -37,6 +37,7 @@ jobs:
           ./build.py ndk
           ./build.py -v binary
           ls ./native/out/
+          mkdir ../out/x86_64/ ../out/x86/ ../out/arm64-v8a/ ./out/armeabi-v7a/
           cp ./native/out/x86_64/magiskboot ../out/x86_64/magiskboot
           cp ./native/out/x86/magiskboot ../out/x86/magiskboot
           cp ./native/out/arm64-v8a/magiskboot ../out/arm64-v8a/magiskboot
