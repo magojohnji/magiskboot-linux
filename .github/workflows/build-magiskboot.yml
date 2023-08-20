@@ -55,7 +55,7 @@ jobs:
           cp -r ./out $GITHUB_WORKSPACE
           cd $GITHUB_WORKSPACE
           rm -rf build_workdir
-          mv ./out/* .
+          mv -f ./out/* .
           rm -rf ./out
           {
             git config user.name github-actions
