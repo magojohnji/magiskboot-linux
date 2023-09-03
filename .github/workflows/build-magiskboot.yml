@@ -55,6 +55,7 @@ jobs:
           cp -r ./out $GITHUB_WORKSPACE
           cd $GITHUB_WORKSPACE
           rm -rf build_workdir
+          rm -rf ./x86_64 ./x86 ./arm64-v8a ./armeabi-v7a
           mv -f ./out/* .
           rm -rf ./out
           {
