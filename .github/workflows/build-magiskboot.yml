@@ -74,19 +74,3 @@ jobs:
             echo Execution Failed >RunDate.txt
             exit 1
           }
-
-      - name: Prepare Releasing
-        run: |
-          cd $GITHUB_WORKSPACE
-          zip -r Build-${{ env.BUILD_TIME }} . -x ".git*" -x "README.md" -x "*.zip"
-
-      - name: Release
-        uses: softprops/action-gh-release@master
-        with:
-          tag_name: Build-${{ env.BUILD_TIME }}
-          draft: false
-          prerelease: false
-          files: |
-            $GITHUB_WORKSPACE/Build-${{ env.BUILD_TIME }}.zip
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
