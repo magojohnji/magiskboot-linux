@@ -9,7 +9,7 @@ If you do not trust this, DO NOT use it!
 
 > You DO NEED a Linux machine!
 
-- Download **`magiskboot`** form [**Releases**](https://github.com/magojohnji/magiskboot/releases) or [**Source Code**](https://github.com/magojohnji/magiskboot/archive/refs/heads/main.zip)
+- Download **`magiskboot`** form [**Source Code**](https://github.com/magojohnji/magiskboot/archive/refs/heads/main.zip)
 
 - If shell says **`Permission denied`**, Run *`chmod +x magiskboot`* to make it executable.
 
