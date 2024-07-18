@@ -1,7 +1,7 @@
 # magiskboot
 
 ## Introduction
-The **magiskboot**, one of [Magisk](https://github.com/topjohnwu/Magisk)'s binary, built form Magisk ([topjohnwu](https://github.com/topjohnwu)) source code, using GitHub Actions.
+The **magiskboot**, one of [Magisk](https://github.com/topjohnwu/Magisk)'s binary, built form Magisk (topjohnwu) source code, using GitHub Actions.
 
 If you do not trust this, DO NOT use it!
 
@@ -16,6 +16,10 @@ If you do not trust this, DO NOT use it!
 - Type *`./magiskboot`* to use it.
 
 - Enjoy!
+
+## Windows
+
+**If you are looking for magiskboot for Windows, you may need** [**this**](https://github.com/svoboda18/magiskboot).
 
 ## Greatful
 [Magisk](https://github.com/topjohnwu/Magisk)
